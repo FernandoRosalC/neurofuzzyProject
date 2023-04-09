@@ -3,7 +3,11 @@ import matplotlib.pyplot as plt
 import skfuzzy as fuzz
 from matplotlib import cm
 import Functions as P1
+import comSerial as comS
 
+A = 35
+R = 11
+P = 4
 
 def defuzzify(A,R,P):
     #print("actual temp: ", A)
@@ -86,9 +90,6 @@ s_fast = P1.Trapezoidal(speed, 65, 90, 100, 100)
 #R = round(int(input("Ingresa el valor de la temperatura requerida: ")), 0)
 #P = round(int(input("Ingresa el valor de la cantidad de personas: ")), 0)
 
-A= 34
-R = 11
-P = 15
 
 finalCut_Speed = defuzzify(A, R, P)
 

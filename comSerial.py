@@ -7,14 +7,28 @@ from matplotlib.lines import Line2D
 import numpy as np
 
 
+
+
 def getSerialData(self,Samples,numData,serialConnection, lines):
     for i in range(numData):
         value  = float(serialConnection.readline().strip())  #Leer sensor / Read sensor
-        print(value) # Imprimir valor / Print value 
         data[i].append(value) #Guarda lectura en la última posición / #Save reading in the end position
         lines[i].set_data(range(Samples),data[i]) # Dibujar nueva linea / Drawn new line
-
         
+
+##NO JALO COMO QUERIA
+## CHECAR COMO MANDAR LOS DATOS DEL SERIAL A LA FUNCION PRINCIPAL
+def readSerialData(self,serialConnection):
+    Temp = int(serialConnection.readline().strip())  #Leer sensor / Read sensor
+    Temp_req = int(serialConnection.readline().strip())  #Leer sensor / Read sensor
+    People = int(serialConnection.readline().strip())  #Leer sensor / Read sensor
+    print("Temperatura: ",Temp)    
+    print("Temperatura Requerida: ",Temp_req)
+    print("Personas: ",People)
+    
+    return Temp, Temp_req, People       
+
+
 serialPort = 'COM4' # Puerto serial arduino / Arduino serial port
 baudRate = 9600  # Baudios
 
