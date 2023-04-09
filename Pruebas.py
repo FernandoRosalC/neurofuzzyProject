@@ -10,14 +10,14 @@ speed = np.arange(0, 100, 1)
 
 #Membership functions INPUTS
 #Actual temperature
-at_low = P1.Trapezoidal(temperature, 0, 0, 5, 15)
-at_med = P1.Trapezoidal(temperature, 5, 15, 20, 30)
-at_high = P1.Trapezoidal(temperature, 20, 30, 35, 35)
+at_low = P1.Trapezoidal(temperature, 0, 0, 0, 10)
+at_med = P1.Trapezoidal(temperature, 7, 15, 20, 28)
+at_high = P1.Trapezoidal(temperature, 25, 35, 35, 35)
 
 #Requested temperature
-rt_low = P1.Trapezoidal(temperature, 0, 0, 5, 15)
-rt_med = P1.Trapezoidal(temperature, 5, 15, 20, 30)
-rt_high = P1.Trapezoidal(temperature, 20, 30, 35, 35)
+rt_low = P1.Trapezoidal(temperature, 0, 0, 0, 10)
+rt_med = P1.Trapezoidal(temperature, 7, 15, 20, 28)
+rt_high = P1.Trapezoidal(temperature, 25, 35, 35, 35)
 
 #Number of people
 p_few = P1.Trapezoidal(people, 0, 0, 5, 8)
@@ -37,6 +37,30 @@ plt.plot(temperature, at_low, 'b', linewidth=1.5, label='Low')
 plt.plot(temperature, at_med, 'g', linewidth=1.5, label='Medium')
 plt.plot(temperature, at_high, 'r', linewidth=1.5, label='High')
 plt.title('Actual Temperature')
+plt.ylabel('Membership degree')
+plt.legend()
+
+plt.subplot(3, 3, 4)
+plt.plot(temperature, rt_low, 'b', linewidth=1.5, label='Low')
+plt.plot(temperature, rt_med, 'g', linewidth=1.5, label='Medium')
+plt.plot(temperature, rt_high, 'r', linewidth=1.5, label='High')
+plt.title('Requested Temperature')
+plt.ylabel('Membership degree')
+plt.legend()
+
+plt.subplot(3, 3, 7)
+plt.plot(people, p_few, 'b', linewidth=1.5, label='Few')
+plt.plot(people, p_med, 'g', linewidth=1.5, label='Medium')
+plt.plot(people, p_lot, 'r', linewidth=1.5, label='Lot')
+plt.title('Number of people')
+plt.ylabel('Membership degree')
+plt.legend()
+
+plt.subplot(3, 3, 6)
+plt.plot(speed, s_low, 'b', linewidth=1.5, label='Low')
+plt.plot(speed, s_reg, 'g', linewidth=1.5, label='Medium')
+plt.plot(speed, s_fast, 'r', linewidth=1.5, label='High')
+plt.title('Speed')
 plt.ylabel('Membership degree')
 plt.legend()
 
