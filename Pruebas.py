@@ -127,7 +127,6 @@ plt.ylabel('Membership degree')
 plt.legend()
 
 
-
 ######################Plotting the final result######################
 plt.figure(2)
 #plt.plot(speed, s_slow, 'b', linewidth=1.5, label='Low')

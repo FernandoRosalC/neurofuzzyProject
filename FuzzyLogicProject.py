@@ -4,7 +4,6 @@ import skfuzzy as fuzz
 from matplotlib import cm
 import Functions as P1
 
-
 def defuzzify(A,R,P):
     #print("actual temp: ", A)
     rule1 = np.fmin(at_low[A], np.fmin(rt_low[R], p_few[P]))
@@ -117,7 +116,6 @@ plt.plot(speed, s_fast, 'r', linewidth=1.5, label='High')
 plt.title('Speed')
 plt.ylabel('Membership degree')
 plt.legend()
-
 
 
 ######################Plotting the final result######################
