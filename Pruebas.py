@@ -59,6 +59,8 @@ def defuzzify(A,R,P):
     rule26 = np.fmin(at_high[A], np.fmin(rt_high[R], p_med[P]))
     rule27 = np.fmin(at_high[A], np.fmin(rt_high[R], p_lot[P]))
     
+    global cut_low, cut_reg, cut_fast
+    
     S_low_max = np.fmax(rule1, np.fmax(rule7, np.fmax(rule8, np.fmax(rule9, np.fmax(rule13, np.fmax(rule16, np.fmax(rule17, np.fmax(rule18, np.fmax(rule25, np.fmax(rule26, rule27))))))))))
     S_reg_max = np.fmax(rule2, np.fmax(rule4, np.fmax(rule5, np.fmax(rule10, np.fmax(rule14, np.fmax(rule19, rule22))))))
     S_fast_max = np.fmax(rule3, np.fmax(rule6, np.fmax(rule11, np.fmax(rule12, np.fmax(rule15, np.fmax(rule20, np.fmax(rule21, np.fmax(rule23, rule24))))))))
@@ -74,7 +76,7 @@ def defuzzify(A,R,P):
 
 ##Plotting membership functions
 plt.figure(1)
-plt.subplot(3, 3, 1)
+plt.subplot(2, 2, 1)
 plt.plot(temperature, at_low, 'b', linewidth=1.5, label='Low')
 plt.plot(temperature, at_med, 'g', linewidth=1.5, label='Medium')
 plt.plot(temperature, at_high, 'r', linewidth=1.5, label='High')
@@ -82,7 +84,7 @@ plt.title('Actual Temperature')
 plt.ylabel('Membership degree')
 plt.legend()
 
-plt.subplot(3, 3, 4)
+plt.subplot(2, 2, 2)
 plt.plot(temperature, rt_low, 'b', linewidth=1.5, label='Low')
 plt.plot(temperature, rt_med, 'g', linewidth=1.5, label='Medium')
 plt.plot(temperature, rt_high, 'r', linewidth=1.5, label='High')
@@ -90,7 +92,7 @@ plt.title('Requested Temperature')
 plt.ylabel('Membership degree')
 plt.legend()
 
-plt.subplot(3, 3, 7)
+plt.subplot(2, 2, 3)
 plt.plot(people, p_few, 'b', linewidth=1.5, label='Few')
 plt.plot(people, p_med, 'g', linewidth=1.5, label='Medium')
 plt.plot(people, p_lot, 'r', linewidth=1.5, label='Lot')
@@ -98,7 +100,7 @@ plt.title('Number of people')
 plt.ylabel('Membership degree')
 plt.legend()
 
-plt.subplot(3, 3, 6)
+plt.subplot(2, 2, 4)
 plt.plot(speed, s_low, 'b', linewidth=1.5, label='Low')
 plt.plot(speed, s_reg, 'g', linewidth=1.5, label='Medium')
 plt.plot(speed, s_fast, 'r', linewidth=1.5, label='High')
@@ -106,5 +108,21 @@ plt.title('Speed')
 plt.ylabel('Membership degree')
 plt.legend()
 
+finalCut_Speed = defuzzify(35, 11, 15)
+
+######################Plotting the final result######################
+plt.figure(2)
+plt.plot(speed, s_low, 'b', linewidth=1.5, label='Low')
+plt.plot(speed, s_reg, 'g', linewidth=1.5, label='Medium')
+plt.plot(speed, s_fast, 'r', linewidth=1.5, label='High')
+plt.plot(speed, cut_low, 'b', linewidth=0.5, linestyle='--', )
+plt.plot(speed, cut_reg, 'g', linewidth=0.5, linestyle='--')
+plt.plot(speed, cut_fast, 'r', linewidth=0.5, linestyle='--')
+plt.axvline(fuzz.defuzz(speed, finalCut_Speed, 'centroid'), color='k', linestyle='--', linewidth=1.5)
+
+plt.fill_between(speed, finalCut_Speed, facecolor='Orange', alpha=0.7)
+print("The speed is: ", fuzz.defuzz(speed, finalCut_Speed, 'centroid'))
+plt.title('Speed')
+plt.legend()
 
 plt.show()
