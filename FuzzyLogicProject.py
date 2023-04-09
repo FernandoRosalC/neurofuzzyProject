@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import skfuzzy as fuzz
 from matplotlib import cm
-import P1_Centeno_Monzalvo as P1
+import Functions as P1
 
 def defuzzify(F,G):
     rule1 = np.fmin(F_NE[F], G_NE[G])
