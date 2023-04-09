@@ -30,6 +30,48 @@ s_low= P1.Trapezoidal(speed, 0, 0, 10, 35)
 s_reg = P1.Trapezoidal(speed, 15, 40, 60, 85)
 s_fast = P1.Trapezoidal(speed, 65, 90, 100, 100)
 
+def defuzzify(A,R,P):
+    rule1 = np.fmin(at_low[A], np.fmin(rt_low[R], p_few[P]))
+    rule2 = np.fmin(at_low[A], np.fmin(rt_low[R], p_med[P]))
+    rule3 = np.fmin(at_low[A], np.fmin(rt_low[R], p_lot[P]))    
+    rule4 = np.fmin(at_low[A], np.fmin(rt_med[R], p_few[P]))
+    rule5 = np.fmin(at_low[A], np.fmin(rt_med[R], p_med[P]))
+    rule6 = np.fmin(at_low[A], np.fmin(rt_med[R], p_lot[P]))
+    rule7 = np.fmin(at_low[A], np.fmin(rt_high[R], p_few[P]))
+    rule8 = np.fmin(at_low[A], np.fmin(rt_high[R], p_med[P]))
+    rule9 = np.fmin(at_low[A], np.fmin(rt_high[R], p_lot[P]))
+    rule10 = np.fmin(at_med[A], np.fmin(rt_low[R], p_few[P]))
+    rule11 = np.fmin(at_med[A], np.fmin(rt_low[R], p_med[P]))
+    rule12 = np.fmin(at_med[A], np.fmin(rt_low[R], p_lot[P]))
+    rule13 = np.fmin(at_med[A], np.fmin(rt_med[R], p_few[P]))
+    rule14 = np.fmin(at_med[A], np.fmin(rt_med[R], p_med[P]))
+    rule15 = np.fmin(at_med[A], np.fmin(rt_med[R], p_lot[P]))
+    rule16 = np.fmin(at_med[A], np.fmin(rt_high[R], p_few[P]))
+    rule17 = np.fmin(at_med[A], np.fmin(rt_high[R], p_med[P]))
+    rule18 = np.fmin(at_med[A], np.fmin(rt_high[R], p_lot[P]))
+    rule19 = np.fmin(at_high[A], np.fmin(rt_low[R], p_few[P]))
+    rule20 = np.fmin(at_high[A], np.fmin(rt_low[R], p_med[P]))
+    rule21 = np.fmin(at_high[A], np.fmin(rt_low[R], p_lot[P]))
+    rule22 = np.fmin(at_high[A], np.fmin(rt_med[R], p_few[P]))
+    rule23 = np.fmin(at_high[A], np.fmin(rt_med[R], p_med[P]))
+    rule24 = np.fmin(at_high[A], np.fmin(rt_med[R], p_lot[P]))
+    rule25 = np.fmin(at_high[A], np.fmin(rt_high[R], p_few[P]))
+    rule26 = np.fmin(at_high[A], np.fmin(rt_high[R], p_med[P]))
+    rule27 = np.fmin(at_high[A], np.fmin(rt_high[R], p_lot[P]))
+    
+    S_low_max = np.fmax(rule1, np.fmax(rule7, np.fmax(rule8, np.fmax(rule9, np.fmax(rule13, np.fmax(rule16, np.fmax(rule17, np.fmax(rule18, np.fmax(rule25, np.fmax(rule26, rule27))))))))))
+    S_reg_max = np.fmax(rule2, np.fmax(rule4, np.fmax(rule5, np.fmax(rule10, np.fmax(rule14, np.fmax(rule19, rule22))))))
+    S_fast_max = np.fmax(rule3, np.fmax(rule6, np.fmax(rule11, np.fmax(rule12, np.fmax(rule15, np.fmax(rule20, np.fmax(rule21, np.fmax(rule23, rule24))))))))
+    
+    cut_low = np.fmin(s_low, np.full(len(s_low), S_low_max))
+    cut_reg = np.fmin(s_reg, np.full(len(s_reg), S_reg_max))
+    cut_fast = np.fmin(s_fast, np.full(len(s_fast), S_fast_max))
+    
+    finalCut_Speed = np.fmax(cut_low, np.fmax(cut_reg, cut_fast))    
+    
+    return finalCut_Speed
+
+
 ##Plotting membership functions
 plt.figure(1)
 plt.subplot(3, 3, 1)
