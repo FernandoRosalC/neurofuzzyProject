@@ -49,7 +49,7 @@ def defuzzify(A,R,P):
     return finalCut_Speed
 
 
-temperature = np.arange(0, 36, 1)
+temperature = np.arange(0, 36, 0.5)
 people = np.arange(0, 21, 1)
 speed = np.arange(0, 101, 1)
 
